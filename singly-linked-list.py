@@ -89,6 +89,41 @@ class LinkedList:
             counter += 1
             current = current.next
 
+    def swap_nodes(self, k1, k2):
+        if self.head is None or self.head.next is None:
+            return
+        # no validations -> bugs in certain cases
+        current = self.head
+
+        p_node1 = None
+        node1 = None
+        p_node2 = None
+        node2 = None
+
+        while current.next is not None:
+            if current.next.data == k1:
+                p_node1 = current
+                node1 = current.next
+            elif current.next.data == k2:
+                p_node2 = current
+                node2 = current.next
+
+            current = current.next
+
+        p_node1.next = node2
+        p_node2.next = node1
+
+        node1.next, node2.next = node2.next, node1.next
+
+    def list_length(self):
+        items = 0
+        current = self.head
+        while current.next is not None:
+            items += 1
+            current = current.next
+
+        return items
+
     def print_list(self):
         if self.head is None:
             print('Head is empty')
